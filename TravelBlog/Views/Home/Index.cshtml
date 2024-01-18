@@ -1,0 +1,86 @@
+﻿@model TravelBlog.Models.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container col-xxl-8 px-4 py-5 ">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                Travel Blog
+            </h1>
+            <p class="lead">
+                Embark on a journey of discovery with our Travel Blog, where every click leads to a new adventure. Immerse yourself in captivating travel stories, breathtaking destinations, and firsthand experiences. Wanderlust meets web design in this beautifully crafted space dedicated to the exploration of cultures, landscapes, and the joy of the journey. Join us as we traverse the globe, sharing tales that inspire, tips that guide, and moments that linger. Your passport to wanderlust awaits – start exploring with our Travel Blog today!
+            </p>
+
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <img src="https://images.pexels.com/photos/335393/pexels-photo-335393.jpeg?auto=compress&cs=tinysrgb&w=600"
+                 alt="Travel Blog" class="d-block mx-lg-auto img-fluid" width="300"></img>
+
+        </div>
+    </div>
+</div>
+
+
+@* <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            @if (Model != null && Model.Tags.Any())
+            {
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="badge bg-dark me-1">
+                        @tag.Name
+                    </span>
+                }
+            }
+        </div>
+    </div>
+</div> *@
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            @if (Model != null && Model.BlogPosts.Any())
+            {
+                foreach (var blogPost in Model.BlogPosts)
+                {
+                    <div class="mb-5 bg-light box-shadow p-5">
+
+                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading"
+                             class="mb-2 d-block img-fluid" />
+
+                        <h2 class="mb-4">@blogPost.Heading</h2>
+
+                        <p class="mb-4">
+                            Author: @blogPost.Author
+                            <br />
+                            Published Date: @blogPost.PublishedDate.ToShortDateString()
+                        </p>
+
+                        <p class="mb-4">
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </p>
+
+                        <p class="mb-4">@blogPost.ShortDescription</p>
+
+                        <a class="btn btn-dark"
+                           asp-area=""
+                           asp-controller="Blogs"
+                           asp-action="Index"
+                           asp-route-urlHandle="@blogPost.UrlHandle">Read More</a>
+
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</div>
